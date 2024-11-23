@@ -38,9 +38,25 @@ Pour arrêter le réseau des containers lancés, vous devez taper:
 ```cmd
 docker-compose down
 ```
+---
+<div class="alert alert-warning">
+  <div class="alert-header">
+    <i class="fas fa-exclamation-triangle"></i> Avertissement
+  </div>
+  <div class="alert-body">
+    Si vous avez déjà lancé docker-compose durant la séance précédente du tp, une erreur indiquant l'existance d'un certain network qui utilise la même plage d'adresses sera affichée. Pour résoudre ce problème, il faut supprimer tous les containers qui ont une relation avec ce network puis l'effacer lui-même.
+  </div>
+</div>
+---
+Voici comment vous devez procéder:
+```cmd
 docker rm -f $(docker ps -aq)
-Vérifier le nom du network
+```
+Vérifier le nom du network en tapant:
+```cmd
 docker network ls
-puis
+```
+enfin, lancez:
+```cmd
 docker network rm enit_lab3_hive_hadoop_net
-
+```
