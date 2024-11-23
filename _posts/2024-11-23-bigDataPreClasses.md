@@ -32,9 +32,15 @@ Tapez :
 ```cmd
 docker-compose up -d
 ```
+![image](https://github.com/user-attachments/assets/787734b2-a210-4c37-8f74-006937ff937f)
 
-![image](https://github.com/user-attachments/assets/c6e93314-df30-43c2-8663-088195335d8e)
 Pour arrêter le réseau des containers lancés, vous devez taper:
 ```cmd
 docker-compose down
 ```
+docker rm -f $(docker ps -aq)
+Vérifier le nom du network
+docker network ls
+puis
+docker network rm enit_lab3_hive_hadoop_net
+
