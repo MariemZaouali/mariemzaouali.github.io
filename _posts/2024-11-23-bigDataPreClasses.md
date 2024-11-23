@@ -1,8 +1,8 @@
 ---
 layout: post
-title: TP2 Manipulation des données avec Apache Hive
-subtitle: Deuxième TP
-tags: [Big Data, Hive, Hadoop]
+title: PreClasses
+subtitle: Instructions d'exécution sur docker-compose
+tags: [Big Data, Docker-compose]
 author: Mariem ZAOUALI
 ---
 
