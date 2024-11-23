@@ -32,6 +32,8 @@ Tapez :
 ```cmd
 docker-compose up -d
 ```
+
+![image](https://github.com/user-attachments/assets/c6e93314-df30-43c2-8663-088195335d8e)
 Pour arrêter le réseau des containers lancés, vous devez taper:
 ```cmd
 docker-compose down
