@@ -48,15 +48,16 @@ docker-compose down
   </div>
 </div>
 ---
-Voici comment vous devez procéder:
+Voici comment vous devez procéder. Dans un terminal, lancez cette commande pour effacer tous les containers qui sont sur votre machine:
 ```cmd
 docker rm -f $(docker ps -aq)
 ```
-Vérifier le nom du network en tapant:
+Vérifiez le nom du network que vous voulez supprimer en tapant:
 ```cmd
 docker network ls
 ```
-enfin, lancez:
+enfin, lancez par exemple:
 ```cmd
 docker network rm enit_lab3_hive_hadoop_net
 ```
+étant **enit_lab3_hive_hadoop_net** le nom du network à supprimer.
