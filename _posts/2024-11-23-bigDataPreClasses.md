@@ -8,10 +8,9 @@ author: Mariem ZAOUALI
 
 # Travailler le lab avec docker et docker compose
 
-Pour pouvoir réaliser les labs de big data, vous pouvez toujours vous servir de vos machines sur Azure Lab Services (disponibles du Dimanche après-midi au Jeudi Soir)
-ou bien travailler sur votre machine en local en se servant d'une image iso Ubtuntu.
+Pour pouvoir réaliser les labs de big data, vous pouvez toujours vous servir de vos machines sur Azure Lab Services (disponibles du Dimanche après-midi au Jeudi Soir) ou bien travailler sur votre machine en local en se servant d'une image iso Ubtuntu.
 
-# Configurer la machine en local
+# Configurer la machine 
 ## Installer docker et docker-compose
 Je recommande ce tutorial pour installer docker:
 ```link
@@ -24,9 +23,10 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-o
 ## Téléchargement du dossier du lab
 Si vous allez travailler sur une machine en local, vous devez télécharger ce fichier compressé:
 ```link
+https://drive.google.com/file/d/1ylYVu1Q0PBY6LxTM7yvH9DHBw1QFnft1/view?usp=sharing
 ```
 
-## Lancer le network
+# Lancer le network
 Placez-vous dans le répertoire du lab où se trouve le fichier **docker-compose.yml**.
 Tapez :
 ```cmd
