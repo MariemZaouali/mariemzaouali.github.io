@@ -21,7 +21,6 @@ author: Mariem ZAOUALI
 navbar-links:
   Enseignement:
     - Big Data:
-        url: "bigData"
         subpages:
           - title: "TP1 Apache Hadoop"
             url: "2024-11-11-bigDataTp1"
