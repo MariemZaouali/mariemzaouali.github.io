@@ -23,11 +23,16 @@ navbar-links:
     - Big Data:
         url: "bigData"
         subpages:
-          - TP1 Apache Hadoop: "bigData/2024-11-11-bigDataTp1"
-    - Développement Avancé d'applications Web: "webDev"
-    - Workflow et BPMN: "workflow"
-  Recherche: "https://www.researchgate.net/profile/Mariem-Zaouali"
-  A propos de moi: "aboutme"
+          - title: "TP1 Apache Hadoop"
+            url: "bigData/2024-11-11-bigDataTp1"
+    - Développement Avancé d'applications Web: 
+        url: "webDev"
+    - Workflow et BPMN: 
+        url: "workflow"
+  Recherche: 
+    url: "https://www.researchgate.net/profile/Mariem-Zaouali"
+  A propos de moi: 
+    url: "aboutme"
 
 
 ################
