@@ -127,11 +127,16 @@ layout: base
   position: sticky;
   top: 20px;
   background: #ffffff;
+  top: 70px; /* Ajustez cette valeur selon la hauteur de votre barre supérieure */
+  margin-top: 10px; /* Ajout d'un léger espace supplémentaire si nécessaire */
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   max-height: 100%; /* Suppression du scroll */
+  max-width: 100%; /* Empêche le dépassement au-delà de son conteneur */
+  overflow: hidden; /* Coupe le contenu débordant si nécessaire */
+  word-wrap: break-word; /* Gère le débordement du texte long */
 }
 
 /* Titre principal du menu */
