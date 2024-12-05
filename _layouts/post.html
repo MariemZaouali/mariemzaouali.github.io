@@ -6,9 +6,9 @@ layout: base
 
 <main class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
   <div class="row">
-    <!-- Contenu principal -->
-    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-1 col-lg-8 {% endif %}">
-      {% if page.before-content %}
+      <!-- Contenu principal -->
+    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
+     {% if page.before-content %}
         <div class="before-content">
           {% for file in page.before-content %}
             {% include {{ file }} %}
@@ -107,11 +107,11 @@ layout: base
 }
 
 /* Titre principal du menu */
-#table-of-contents h5 {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
+#table-of-contents {
+  max-width: 300px; /* Limite la largeur du menu de navigation */
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Styles pour la liste principale */
@@ -124,7 +124,7 @@ layout: base
 /* Niveaux hiérarchiques */
 .toc-h1 > a {
   font-weight: bold;
-  color: #007bff;
+  color: #575757
   font-size: 14px;
 }
 
@@ -233,5 +233,22 @@ layout: base
   color: #155724;
 }
 
+/* Titre dans le contenu principal */
+h1 {
+  font-size: 1.75rem; /* Taille du titre plus petite */
+  margin-bottom: 20px; /* Espacement sous le titre */
+  line-height: 1.3;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px; /* Espacement entre les colonnes */
+}
+
+.row > div {
+  flex: 1; /* Permet aux éléments de se répartir également */
+  max-width: 100%; /* Limite l'élargissement */
+}
 
 </style>
