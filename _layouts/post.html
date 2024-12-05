@@ -53,14 +53,43 @@ layout: base
     const toc = document.querySelector('#table-of-contents .toc-list');
     const headers = document.querySelectorAll('.blog-post h1, .blog-post h2, .blog-post h3');
 
+    let currentParent = null;
+
     headers.forEach((header, index) => {
       const id = `header-${index}`;
-      header.id = id; // Ajout d'un ID unique pour chaque titre
+      header.id = id;
 
       const li = document.createElement('li');
-      li.classList.add(`toc-${header.tagName.toLowerCase()}`);
       li.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
-      toc.appendChild(li);
+      li.classList.add(`toc-${header.tagName.toLowerCase()}`);
+
+      if (header.tagName.toLowerCase() === 'h1') {
+        currentParent = document.createElement('ul');
+        currentParent.classList.add('toc-sublist');
+        li.appendChild(currentParent);
+        toc.appendChild(li);
+      } else if (header.tagName.toLowerCase() === 'h2' && currentParent) {
+        const subLi = document.createElement('li');
+        subLi.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
+        currentParent.appendChild(subLi);
+      } else if (header.tagName.toLowerCase() === 'h3' && currentParent) {
+        const subLi = document.createElement('li');
+        subLi.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
+        subLi.classList.add('toc-indent');
+        currentParent.appendChild(subLi);
+      }
+    });
+
+    // Ajout de l'accordion
+    const mainLinks = document.querySelectorAll('#table-of-contents > .toc-list > li > a');
+    mainLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const sublist = this.parentNode.querySelector('.toc-sublist');
+        if (sublist) {
+          sublist.classList.toggle('visible');
+        }
+      });
     });
   });
 </script>
@@ -68,59 +97,78 @@ layout: base
 <!-- CSS pour styliser la barre de navigation -->
 <style>
   /* Style pour la barre de navigation sticky */
+/* Style de base pour la table des matières */
 #table-of-contents {
-    position: sticky;
-    top: 20px;
-    background: #ffffff; /* Couleur blanche pour l'arrière-plan */
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Légère ombre */
-    max-height: 80vh;
-    overflow-y: auto;
+  position: sticky;
+  top: 20px;
+  background: #ffffff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 #table-of-contents h5 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333; /* Couleur du texte */
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 }
 
+/* Liste principale */
 .toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.toc-list li {
-    margin: 5px 0;
+.toc-list > li {
+  margin: 5px 0;
 }
 
-.toc-list li a {
-    text-decoration: none;
-    color: #007bff; /* Couleur bleue des liens */
-    font-size: 14px;
+.toc-list > li > a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.toc-list li a:hover {
-    text-decoration: underline;
+.toc-list > li > a:hover {
+  text-decoration: underline;
 }
 
-/* Indentation selon les niveaux (h1, h2, h3) */
-.toc-h1 {
-    font-weight: bold;
-    margin-left: 0;
+/* Sous-liste (h2 et h3) */
+.toc-sublist {
+  list-style: none;
+  margin-left: 15px;
+  padding-left: 10px;
+  display: none; /* Par défaut, cachée pour l'accordéon */
+  border-left: 2px solid #ddd;
 }
 
-.toc-h2 {
-    margin-left: 10px;
+.toc-sublist.visible {
+  display: block; /* Affichage quand visible */
 }
 
-.toc-h3 {
-    margin-left: 20px;
+.toc-sublist li {
+  margin: 5px 0;
 }
 
+.toc-sublist li a {
+  font-size: 13px;
+  color: #555;
+}
+
+.toc-sublist li a:hover {
+  text-decoration: underline;
+}
+
+/* Indentation pour les sous-titres (h3) */
+.toc-indent {
+  margin-left: 20px;
+}
 
   .copy-button {
     background-color: #4CAF50;
