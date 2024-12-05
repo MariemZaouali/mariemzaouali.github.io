@@ -89,6 +89,34 @@ layout: base
       }
     });
   });
+<!-- Include JavaScript for copy functionality -->
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('pre code').forEach(function (codeBlock) {
+      const button = document.createElement('button');
+      button.textContent = 'Copy';
+      button.className = 'copy-button';
+      button.addEventListener('click', function () {
+        const range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        try {
+          document.execCommand('copy');
+          button.textContent = 'Copied'; // Change button text
+          button.classList.add('copied'); // Add copied class
+          setTimeout(() => {
+            button.textContent = 'Copy'; // Reset button text after delay
+            button.classList.remove('copied'); // Remove copied class
+          }, 2000); // Delay in milliseconds
+        } catch (err) {
+          console.error('Failed to copy code: ', err);
+        }
+        window.getSelection().removeAllRanges();
+      });
+      codeBlock.parentElement.insertBefore(button, codeBlock);
+    });
+  });
 </script>
 
 <!-- CSS pour styliser la barre de navigation -->
@@ -107,12 +135,13 @@ layout: base
 }
 
 /* Titre principal du menu */
-#table-of-contents {
-  max-width: 300px; /* Limite la largeur du menu de navigation */
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+#table-of-contents h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 }
+
 
 /* Styles pour la liste principale */
 .toc-list {
