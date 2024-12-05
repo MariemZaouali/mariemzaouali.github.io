@@ -41,8 +41,7 @@ layout: base
     <!-- Barre de navigation sticky -->
     <aside class="col-xl-3 col-lg-4 d-none d-lg-block">
       <div id="table-of-contents">
-        <h5>Navigation</h5>
-        <ul class="toc-list"></ul>
+          <ul class="toc-list"></ul>
       </div>
     </aside>
   </div>
@@ -69,54 +68,136 @@ layout: base
 <!-- CSS pour styliser la barre de navigation -->
 <style>
   /* Style pour la barre de navigation sticky */
-  #table-of-contents {
+#table-of-contents {
     position: sticky;
     top: 20px;
-    background: #f8f9fa;
+    background: #ffffff; /* Couleur blanche pour l'arrière-plan */
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Légère ombre */
     max-height: 80vh;
     overflow-y: auto;
-  }
+}
 
-  #table-of-contents h5 {
+#table-of-contents h5 {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
-  }
+    color: #333; /* Couleur du texte */
+}
 
-  .toc-list {
+.toc-list {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
+}
 
-  .toc-list li {
+.toc-list li {
     margin: 5px 0;
-  }
+}
 
-  .toc-list li a {
+.toc-list li a {
     text-decoration: none;
-    color: #007bff;
+    color: #007bff; /* Couleur bleue des liens */
     font-size: 14px;
-  }
+}
 
-  .toc-list li a:hover {
+.toc-list li a:hover {
     text-decoration: underline;
-  }
+}
 
-  .toc-h1 {
+/* Indentation selon les niveaux (h1, h2, h3) */
+.toc-h1 {
     font-weight: bold;
     margin-left: 0;
-  }
+}
 
-  .toc-h2 {
+.toc-h2 {
     margin-left: 10px;
+}
+
+.toc-h3 {
+    margin-left: 20px;
+}
+
+
+  .copy-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: background-color 0.3s;
   }
 
-  .toc-h3 {
-    margin-left: 20px;
+  .copy-button:hover {
+    background-color: #45a049;
   }
+
+  .copy-button.copied {
+    background-color: #d3d3d3; /* Gray color */
+    color: #333;
+    cursor: not-allowed;
+  }
+
+  pre {
+    position: relative;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: monospace;
+  }
+  .alert {
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.alert-header {
+  font-weight: bold;
+  color: #856404;
+}
+
+.alert-body {
+  color: #856404;
+}
+
+.alert i {
+  margin-right: .5rem;
+}
+  /* Remarque (vert) */
+.alert-remark {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-header-remark {
+  font-weight: bold;
+  color: #155724;
+}
+
+.alert-body-remark {
+  color: #155724;
+}
+
+
 </style>
