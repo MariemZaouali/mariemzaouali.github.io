@@ -103,6 +103,60 @@ Nous allons maintenant ajouter un événement de limite de minuterie pour gérer
 ### Ajouter une passerelle exclusive
 Nous devons maintenant connecter les éléments qui ont été ajoutés au processus afin qu'ils puissent être exécutés.
 
+![image](https://github.com/user-attachments/assets/c4877878-96e7-45dc-ba74-e340af20ddbe)
+
+![image](https://github.com/user-attachments/assets/5bbf1138-d411-4a5a-a709-d8f33d53621e)
+
+Votre diagramme devrait ressembler à celui ci-dessous lorsque vous avez terminé.
+![image](https://github.com/user-attachments/assets/73a225e2-306d-47de-8702-e1447076545a)
+
+
+### Ajouter annotation
+Créez une nouvelle annotation en suivant les étapes ci-dessous :
+
+![image](https://github.com/user-attachments/assets/80f2c296-67c6-4092-b6d7-fab875e2cb5d)
+![image](https://github.com/user-attachments/assets/349e2e51-8262-4448-a745-cd3c74615902)
+
+### Ajouter un commentaire
+Créez un nouveau commentaire en suivant les étapes ci-dessous :
+
+> ⚠️ *Notez bien*:
+> Les commentaires ne font PAS partie de la spécification BPMN. Les commentaires sont une fonctionnalité de Camunda
+> et ne font donc pas partie de la définition du processus ; les commentaires ne seront pas inclus si vous
+> téléchargez le processus sous forme de fichier XML BPMN 2.0.
+
+![image](https://github.com/user-attachments/assets/21201e86-1d25-40a1-9f32-dff2a1e0dbf9)
+
+### Ajouter milestones
+Créez un nouveau jalon (milestone) en suivant les étapes ci-dessous :
+![image](https://github.com/user-attachments/assets/ce4825ee-caaa-47e4-a04d-6df7c9c94e25)
+![image](https://github.com/user-attachments/assets/6330da34-480d-477d-9fb6-5aeccf3c326e)
+![image](https://github.com/user-attachments/assets/0c08c72f-2346-42a0-b078-656318c5fdc6)
+![image](https://github.com/user-attachments/assets/5dedf868-a7cc-483f-a997-500a8762b663)
+![image](https://github.com/user-attachments/assets/09d35641-ffa7-4d9f-b62c-11a317c0b6f4)
+Nous allons maintenant comparer la version actuelle de la définition du processus avec le jalon précédemment enregistré.
+![image](https://github.com/user-attachments/assets/bc8e02a9-c99e-40d8-afa9-ecb51dcb5b99)
+Vous pouvez restaurer la version qui vous convient comme suit.
+![image](https://github.com/user-attachments/assets/91b0d900-437b-4489-b9ff-67290d7d5e5f)
+
+### Simuler le processus
+Assurez-vous que vous êtes dans l'onglet Conception dans le coin supérieur gauche de l'écran.
+Vous pouvez valider votre processus en suivant les étapes ci-dessous :
+-  Cliquez sur le bouton **Token Simulator** dans le coin supérieur droit de l'écran.
+-  Cliquez sur le bouton **Jouer** qui est maintenant apparu sur l'événement de démarrage pour simuler une nouvelle instance de processus par rapport au processus modélisé.
+-  Le simulateur de jetons démarrera une instance de processus qui suivra l'itinéraire par défaut tout au long du processus ; cela se terminera lorsque la demande sera approuvée.
+- 
+Vous pouvez changer le flux pour tester une autre branche du processus
+
+![image](https://github.com/user-attachments/assets/111cdfbd-0978-40c9-9762-2e906c11a566)
+
+
+
+
+
+
+
+
 
 
 
