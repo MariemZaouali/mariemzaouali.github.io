@@ -142,7 +142,7 @@ Vous pouvez restaurer la version qui vous convient comme suit.
 ### Simuler le processus
 Assurez-vous que vous êtes dans l'onglet Conception dans le coin supérieur gauche de l'écran.
 Vous pouvez valider votre processus en suivant les étapes ci-dessous :
--  Cliquez sur le bouton **Token Simulator** dans le coin supérieur droit de l'écran.
+-  Cliquez sur le bouton **Token Simulator** au coin supérieur droit de l'écran.
 -  Cliquez sur le bouton **Jouer** qui est maintenant apparu sur l'événement de démarrage pour simuler une nouvelle instance de processus par rapport au processus modélisé.
 -  Le simulateur de jetons démarrera une instance de processus qui suivra l'itinéraire par défaut tout au long du processus ; cela se terminera lorsque la demande sera approuvée.
 - 
