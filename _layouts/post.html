@@ -53,7 +53,7 @@ layout: base
     const toc = document.querySelector('#table-of-contents .toc-list');
     const headers = document.querySelectorAll('.blog-post h1, .blog-post h2, .blog-post h3');
 
-    let currentParent = null;
+    let levels = { h1: null, h2: null, h3: null }; // Stockage hiérarchique
 
     headers.forEach((header, index) => {
       const id = `header-${index}`;
@@ -61,35 +61,32 @@ layout: base
 
       const li = document.createElement('li');
       li.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
-      li.classList.add(`toc-${header.tagName.toLowerCase()}`);
 
+      // Détection de niveau
       if (header.tagName.toLowerCase() === 'h1') {
-        currentParent = document.createElement('ul');
-        currentParent.classList.add('toc-sublist');
-        li.appendChild(currentParent);
+        li.classList.add('toc-h1');
+        levels.h1 = li;
         toc.appendChild(li);
-      } else if (header.tagName.toLowerCase() === 'h2' && currentParent) {
-        const subLi = document.createElement('li');
-        subLi.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
-        currentParent.appendChild(subLi);
-      } else if (header.tagName.toLowerCase() === 'h3' && currentParent) {
-        const subLi = document.createElement('li');
-        subLi.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
-        subLi.classList.add('toc-indent');
-        currentParent.appendChild(subLi);
-      }
-    });
-
-    // Ajout de l'accordion
-    const mainLinks = document.querySelectorAll('#table-of-contents > .toc-list > li > a');
-    mainLinks.forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const sublist = this.parentNode.querySelector('.toc-sublist');
-        if (sublist) {
-          sublist.classList.toggle('visible');
+        levels.h2 = null; // Réinitialisation des sous-niveaux
+        levels.h3 = null;
+      } else if (header.tagName.toLowerCase() === 'h2') {
+        li.classList.add('toc-h2');
+        if (levels.h1) {
+          let sublist = levels.h1.querySelector('.toc-sublist') || document.createElement('ul');
+          sublist.classList.add('toc-sublist');
+          levels.h1.appendChild(sublist);
+          sublist.appendChild(li);
+          levels.h2 = li;
         }
-      });
+      } else if (header.tagName.toLowerCase() === 'h3') {
+        li.classList.add('toc-h3');
+        if (levels.h2) {
+          let sublist = levels.h2.querySelector('.toc-sublist') || document.createElement('ul');
+          sublist.classList.add('toc-sublist');
+          levels.h2.appendChild(sublist);
+          sublist.appendChild(li);
+        }
+      }
     });
   });
 </script>
@@ -97,7 +94,7 @@ layout: base
 <!-- CSS pour styliser la barre de navigation -->
 <style>
   /* Style pour la barre de navigation sticky */
-/* Style de base pour la table des matières */
+/* Styles de base pour le conteneur */
 #table-of-contents {
   position: sticky;
   top: 20px;
@@ -106,10 +103,10 @@ layout: base
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  max-height: 80vh;
-  overflow-y: auto;
+  max-height: 100%; /* Suppression du scroll */
 }
 
+/* Titre principal du menu */
 #table-of-contents h5 {
   font-size: 16px;
   font-weight: bold;
@@ -117,59 +114,48 @@ layout: base
   color: #333;
 }
 
-/* Liste principale */
+/* Styles pour la liste principale */
 .toc-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.toc-list > li {
-  margin: 5px 0;
-}
-
-.toc-list > li > a {
-  text-decoration: none;
+/* Niveaux hiérarchiques */
+.toc-h1 > a {
+  font-weight: bold;
   color: #007bff;
   font-size: 14px;
-  cursor: pointer;
 }
 
-.toc-list > li > a:hover {
-  text-decoration: underline;
+.toc-h2 > a {
+  margin-left: 15px;
+  font-size: 13px;
+  color: #555;
 }
 
-/* Sous-liste (h2 et h3) */
+.toc-h3 > a {
+  margin-left: 30px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Sous-listes */
 .toc-sublist {
   list-style: none;
-  margin-left: 15px;
+  margin-left: 10px;
   padding-left: 10px;
-  display: none; /* Par défaut, cachée pour l'accordéon */
   border-left: 2px solid #ddd;
-}
-
-.toc-sublist.visible {
-  display: block; /* Affichage quand visible */
 }
 
 .toc-sublist li {
   margin: 5px 0;
 }
 
-.toc-sublist li a {
-  font-size: 13px;
-  color: #555;
-}
-
-.toc-sublist li a:hover {
+/* Effet au survol */
+.toc-list li a:hover {
   text-decoration: underline;
 }
-
-/* Indentation pour les sous-titres (h3) */
-.toc-indent {
-  margin-left: 20px;
-}
-
   .copy-button {
     background-color: #4CAF50;
     color: white;
