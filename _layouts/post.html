@@ -84,8 +84,32 @@ layout: base
       </ul>
       {% include comments.html %}
     </div>
+     <!-- Barre de navigation à droite -->
+    <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
+      <div id="table-of-contents">
+        <h5>Navigation</h5>
+        <ul class="toc-list"></ul>
+      </div>
+    </aside>
   </div>
 </main>
+<!-- JavaScript pour générer la table des matières -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toc = document.querySelector('#table-of-contents .toc-list');
+    const headers = document.querySelectorAll('.blog-post h1, .blog-post h2, .blog-post h3');
+
+    headers.forEach((header, index) => {
+      const id = `header-${index}`;
+      header.id = id; // Ajout d'un ID unique pour chaque titre
+
+      const li = document.createElement('li');
+      li.classList.add(`toc-${header.tagName.toLowerCase()}`);
+      li.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
+      toc.appendChild(li);
+    });
+  });
+</script>
 
 <!-- Include JavaScript for copy functionality -->
 <script>
@@ -116,7 +140,57 @@ layout: base
     });
   });
 </script>
+<!-- CSS pour styliser la barre de navigation -->
+<style>
+  #table-of-contents {
+    position: sticky;
+    top: 20px;
+    background: #f8f9fa;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
+  #table-of-contents h5 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-list li {
+    margin: 5px 0;
+  }
+
+  .toc-list li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+  }
+
+  .toc-list li a:hover {
+    text-decoration: underline;
+  }
+
+  .toc-h1 {
+    font-weight: bold;
+    margin-left: 0;
+  }
+
+  .toc-h2 {
+    margin-left: 10px;
+  }
+
+  .toc-h3 {
+    margin-left: 20px;
+  }
+</style>
 <!-- Include CSS for the copy button -->
 <style>
   .copy-button {
