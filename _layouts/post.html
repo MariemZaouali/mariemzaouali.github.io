@@ -6,31 +6,8 @@ layout: base
 
 <main class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
   <div class="row">
-    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
-
-      {% if page.gh-repo %}
-        {% assign gh_split =  page.gh-repo | split:'/'  %}
-        {% assign gh_user =  gh_split[0]  %}
-        {% assign gh_repo =  gh_split[1]  %}
-
-        <div id="header-gh-btns">
-          {% if page.gh-badge.size > 0 %}
-            {% for badge in page.gh-badge %}
-              {% case badge %}
-                {% when 'star'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'watch'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=watch&v=2&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'fork'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=fork&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'follow'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&type=follow&count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
-              {% endcase %}
-            {% endfor %}
-          {% endif %}
-        </div>
-      {% endif %}
-
+    <!-- Contenu principal -->
+    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-1 col-lg-8 {% endif %}">
       {% if page.before-content %}
         <div class="before-content">
           {% for file in page.before-content %}
@@ -59,33 +36,10 @@ layout: base
           {% endfor %}
         </div>
       {% endif %}
-
-      {% if page.social-share %}
-        {% include social-share.html %}
-      {% endif %}
-
-      <ul class="pagination blog-pager">
-        {% if page.previous.url %}
-        <li class="page-item previous">
-          <a class="page-link" href="{{ page.previous.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title | strip_html | xml_escape}}">
-            <i class="fas fa-arrow-left" alt="Previous Post"></i>
-            <span class="d-none d-sm-inline-block">Previous Post</span>
-          </a>
-        </li>
-        {% endif %}
-        {% if page.next.url %}
-        <li class="page-item next">
-          <a class="page-link" href="{{ page.next.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title | strip_html | xml_escape}}">
-            <span class="d-none d-sm-inline-block">Next Post</span>
-            <i class="fas fa-arrow-right" alt="Next Post"></i>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-      {% include comments.html %}
     </div>
-     <!-- Barre de navigation à droite -->
-    <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
+
+    <!-- Barre de navigation sticky -->
+    <aside class="col-xl-3 col-lg-4 d-none d-lg-block">
       <div id="table-of-contents">
         <h5>Navigation</h5>
         <ul class="toc-list"></ul>
@@ -93,7 +47,8 @@ layout: base
     </aside>
   </div>
 </main>
-<!-- JavaScript pour générer la table des matières -->
+
+<!-- Générer automatiquement la table des matières -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const toc = document.querySelector('#table-of-contents .toc-list');
@@ -111,37 +66,9 @@ layout: base
   });
 </script>
 
-<!-- Include JavaScript for copy functionality -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('pre code').forEach(function (codeBlock) {
-      const button = document.createElement('button');
-      button.textContent = 'Copy';
-      button.className = 'copy-button';
-      button.addEventListener('click', function () {
-        const range = document.createRange();
-        range.selectNode(codeBlock);
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-        try {
-          document.execCommand('copy');
-          button.textContent = 'Copied'; // Change button text
-          button.classList.add('copied'); // Add copied class
-          setTimeout(() => {
-            button.textContent = 'Copy'; // Reset button text after delay
-            button.classList.remove('copied'); // Remove copied class
-          }, 2000); // Delay in milliseconds
-        } catch (err) {
-          console.error('Failed to copy code: ', err);
-        }
-        window.getSelection().removeAllRanges();
-      });
-      codeBlock.parentElement.insertBefore(button, codeBlock);
-    });
-  });
-</script>
 <!-- CSS pour styliser la barre de navigation -->
 <style>
+  /* Style pour la barre de navigation sticky */
   #table-of-contents {
     position: sticky;
     top: 20px;
@@ -150,6 +77,8 @@ layout: base
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   #table-of-contents h5 {
@@ -190,85 +119,4 @@ layout: base
   .toc-h3 {
     margin-left: 20px;
   }
-</style>
-<!-- Include CSS for the copy button -->
-<style>
-  .copy-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    transition: background-color 0.3s;
-  }
-
-  .copy-button:hover {
-    background-color: #45a049;
-  }
-
-  .copy-button.copied {
-    background-color: #d3d3d3; /* Gray color */
-    color: #333;
-    cursor: not-allowed;
-  }
-
-  pre {
-    position: relative;
-    background-color: #f5f5f5;
-    padding: 10px;
-    border-radius: 5px;
-    overflow-x: auto;
-  }
-
-  code {
-    font-family: monospace;
-  }
-  .alert {
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.alert-warning {
-  color: #856404;
-  background-color: #fff3cd;
-  border-color: #ffeeba;
-}
-
-.alert-header {
-  font-weight: bold;
-  color: #856404;
-}
-
-.alert-body {
-  color: #856404;
-}
-
-.alert i {
-  margin-right: .5rem;
-}
-  /* Remarque (vert) */
-.alert-remark {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-}
-
-.alert-header-remark {
-  font-weight: bold;
-  color: #155724;
-}
-
-.alert-body-remark {
-  color: #155724;
-}
-
-
 </style>
