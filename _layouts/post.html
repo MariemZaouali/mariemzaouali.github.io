@@ -270,11 +270,18 @@ h1 {
 }
 .row {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px; /* Espacement entre les colonnes */
+  flex-wrap: nowrap; /* Empêche les colonnes de se déplacer vers le bas */
 }
 
+.col-xl-8, .col-lg-8 {
+  flex: 0 0 auto; /* Conserve la largeur définie par Bootstrap */
+  max-width: 66.6667%; /* Correspond à col-lg-8 */
+}
+
+.col-xl-3, .col-lg-4 {
+  flex: 0 0 auto; /* Garde la largeur fixe de 25% */
+  max-width: 33.3333%; /* Correspond à col-lg-4 */
+}
 
 
 </style>
