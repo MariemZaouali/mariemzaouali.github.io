@@ -1,0 +1,293 @@
+---
+layout: base
+---
+
+{% include header.html type="post" %}
+
+<main class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
+  <div class="row">
+      <!-- Contenu principal -->
+    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
+     {% if page.before-content %}
+        <div class="before-content">
+          {% for file in page.before-content %}
+            {% include {{ file }} %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="blog-post">
+        {{ content }}
+      </div>
+
+      {% if page.tags.size > 0 %}
+        <div class="blog-tags">
+          <span>Tags:</span>
+          {% for tag in page.tags %}
+            <a href="{{ '/tags' | relative_url }}#{{- tag -}}">{{- tag -}}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if page.after-content %}
+        <div class="after-content">
+          {% for file in page.after-content %}
+            {% include {{ file }} %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Barre de navigation sticky -->
+    <aside class="col-xl-3 col-lg-4 d-none d-lg-block">
+      <div id="table-of-contents">
+          <ul class="toc-list"></ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- Générer automatiquement la table des matières -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toc = document.querySelector('#table-of-contents .toc-list');
+    const headers = document.querySelectorAll('.blog-post h1, .blog-post h2, .blog-post h3');
+
+    let levels = { h1: null, h2: null, h3: null }; // Stockage hiérarchique
+
+    headers.forEach((header, index) => {
+      const id = `header-${index}`;
+      header.id = id;
+
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="#${id}">${header.textContent}</a>`;
+
+      // Détection de niveau
+      if (header.tagName.toLowerCase() === 'h1') {
+        li.classList.add('toc-h1');
+        levels.h1 = li;
+        toc.appendChild(li);
+        levels.h2 = null; // Réinitialisation des sous-niveaux
+        levels.h3 = null;
+      } else if (header.tagName.toLowerCase() === 'h2') {
+        li.classList.add('toc-h2');
+        if (levels.h1) {
+          let sublist = levels.h1.querySelector('.toc-sublist') || document.createElement('ul');
+          sublist.classList.add('toc-sublist');
+          levels.h1.appendChild(sublist);
+          sublist.appendChild(li);
+          levels.h2 = li;
+        }
+      } else if (header.tagName.toLowerCase() === 'h3') {
+        li.classList.add('toc-h3');
+        if (levels.h2) {
+          let sublist = levels.h2.querySelector('.toc-sublist') || document.createElement('ul');
+          sublist.classList.add('toc-sublist');
+          levels.h2.appendChild(sublist);
+          sublist.appendChild(li);
+        }
+      }
+    });
+  });
+<!-- Include JavaScript for copy functionality -->
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('pre code').forEach(function (codeBlock) {
+      const button = document.createElement('button');
+      button.textContent = 'Copy';
+      button.className = 'copy-button';
+      button.addEventListener('click', function () {
+        const range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        try {
+          document.execCommand('copy');
+          button.textContent = 'Copied'; // Change button text
+          button.classList.add('copied'); // Add copied class
+          setTimeout(() => {
+            button.textContent = 'Copy'; // Reset button text after delay
+            button.classList.remove('copied'); // Remove copied class
+          }, 2000); // Delay in milliseconds
+        } catch (err) {
+          console.error('Failed to copy code: ', err);
+        }
+        window.getSelection().removeAllRanges();
+      });
+      codeBlock.parentElement.insertBefore(button, codeBlock);
+    });
+  });
+</script>
+
+<!-- CSS pour styliser la barre de navigation -->
+<style>
+  /* Style pour la barre de navigation sticky */
+/* Styles de base pour le conteneur */
+#table-of-contents {
+  position: sticky;
+  top: 20px;
+  background: #ffffff;
+  top: 70px; /* Ajustez cette valeur selon la hauteur de votre barre supérieure */
+  margin-top: 10px; /* Ajout d'un léger espace supplémentaire si nécessaire */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 100%; /* Suppression du scroll */
+  max-width: 100%; /* Empêche le dépassement au-delà de son conteneur */
+  overflow: hidden; /* Coupe le contenu débordant si nécessaire */
+  word-wrap: break-word; /* Gère le débordement du texte long */
+}
+
+/* Titre principal du menu */
+#table-of-contents h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+
+/* Styles pour la liste principale */
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Niveaux hiérarchiques */
+.toc-h1 > a {
+  font-weight: bold;
+  color: #575757
+  font-size: 14px;
+}
+
+.toc-h2 > a {
+  margin-left: 15px;
+  font-size: 13px;
+  color: #555;
+}
+
+.toc-h3 > a {
+  margin-left: 30px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Sous-listes */
+.toc-sublist {
+  list-style: none;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 2px solid #ddd;
+}
+
+.toc-sublist li {
+  margin: 5px 0;
+}
+
+/* Effet au survol */
+.toc-list li a:hover {
+  text-decoration: underline;
+}
+  .copy-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .copy-button:hover {
+    background-color: #45a049;
+  }
+
+  .copy-button.copied {
+    background-color: #d3d3d3; /* Gray color */
+    color: #333;
+    cursor: not-allowed;
+  }
+
+  pre {
+    position: relative;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: monospace;
+  }
+  .alert {
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.alert-header {
+  font-weight: bold;
+  color: #856404;
+}
+
+.alert-body {
+  color: #856404;
+}
+
+.alert i {
+  margin-right: .5rem;
+}
+  /* Remarque (vert) */
+.alert-remark {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-header-remark {
+  font-weight: bold;
+  color: #155724;
+}
+
+.alert-body-remark {
+  color: #155724;
+}
+
+/* Titre dans le contenu principal */
+h1 {
+  font-size: 1.75rem; /* Taille du titre plus petite */
+  margin-bottom: 20px; /* Espacement sous le titre */
+  line-height: 1.3;
+  color: #6c757d;  /* Change la couleur du titre principal */
+}
+.row {
+  display: flex;
+  flex-wrap: nowrap; /* Empêche les colonnes de se déplacer vers le bas */
+}
+
+.col-xl-8, .col-lg-8 {
+  flex: 0 0 auto; /* Conserve la largeur définie par Bootstrap */
+  max-width: 66.6667%; /* Correspond à col-lg-8 */
+}
+
+.col-xl-3, .col-lg-4 {
+  flex: 0 0 auto; /* Garde la largeur fixe de 25% */
+  max-width: 33.3333%; /* Correspond à col-lg-4 */
+}
+
+
+</style>
