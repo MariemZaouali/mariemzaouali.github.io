@@ -1,11 +1,11 @@
 ---
 layout: post
-title: TP4 Speed Processing avec Spark Streaming, Data Ingestion using Kafka and Persisting using Cassandra
+title: TP4 Speed Processing avec Spark Streaming, Kafka and Persisting using Cassandra
 subtitle: Quatrième TP
 tags: [Big Data, Spark, Streaming, Kafka, NoSQL, Cassandra]
 author: Mariem ZAOUALI
 ---
-# TP4 : Traitement en temps réel avec Spark Streaming, ingestion des données avec Kafka et persistance avec Cassandra
+# TP4 : Traitement en temps réel avec Spark Streaming, Kafka et persistance avec Cassandra
 > **Objectifs du TP :**
 >Au terme de ce TP, vous seriez capable de :
 >-  Manipuler les structures de Spark à savoir RDD et Dataframes
