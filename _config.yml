@@ -23,7 +23,7 @@ navbar-links:
     - Big Data:
         subpages:
           - title: "TP1 Apache Hadoop"
-            url: "2024-11-11-bigDataTp1"
+            url: "2024-11-11-bigDataTp1.md"
     - Développement Avancé d'applications Web: 
         url: "webDev"
     - Workflow et BPMN: 
