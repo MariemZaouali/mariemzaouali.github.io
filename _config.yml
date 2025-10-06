@@ -20,6 +20,7 @@ author: Mariem ZAOUALI
 ###############################################
 navbar-links:
   Enseignement:
+    - Generative AI: "2025-10-06-TblCntGenAi/"
     - Big Data: "2025-10-06-TblCntBigData/"
     - Développement Avancé d'applications Web: 
         url: "webDev"
