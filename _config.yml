@@ -20,7 +20,7 @@ author: Mariem ZAOUALI
 ###############################################
 navbar-links:
   Enseignement:
-    - Big Data: "2024-11-11-bigDataTp1/"
+    - Big Data: "2025-10-06-TblCntBigData/"
     - Développement Avancé d'applications Web: 
         url: "webDev"
     - Workflow et BPMN: 
