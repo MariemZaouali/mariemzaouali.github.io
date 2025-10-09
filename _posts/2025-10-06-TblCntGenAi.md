@@ -8,4 +8,4 @@ author: Mariem ZAOUALI
 
 # Liste des TPs
 
-- [TP2 Transformers](https://mariemzaouali.github.io/09-10-2025-genAITp2)
+- [TP2 Transformers](https://mariemzaouali.github.io/_posts/2025-10-09-genAITp2/)
