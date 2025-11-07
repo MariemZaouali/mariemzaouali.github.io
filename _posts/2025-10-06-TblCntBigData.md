@@ -8,9 +8,7 @@ author: Mariem ZAOUALI
 
 # Liste des TPs
 
-- [TP1 Apache Hadoop](https://mariemzaouali.github.io/2024-11-11-bigDataTp1/)
-- [TP2 Spark](https://mariemzaouali.github.io/2024-11-30-bigDataTp3/)
+- [TP1 Apache Hadoop](https://mariemzaouali.github.io/2025-11-07-bigDataTp1/)
 
-## Slides PPTX
 
-<iframe src="https://drive.google.com/file/d/1TMFKbvtyccc-5RgVRTodV4u8v2921acc/preview" width="400" height="300" allow="autoplay"></iframe>
+
