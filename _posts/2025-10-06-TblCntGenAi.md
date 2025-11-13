@@ -8,4 +8,4 @@ author: Mariem ZAOUALI
 
 # Liste des TPs
 
-- [TP2 Transformers](https://mariemzaouali.github.io/2025-10-09-genAITp2/)
+- [TP1 CNN Challenge](https://mariemzaouali.github.io/2025-11-13-genAITp1/)
