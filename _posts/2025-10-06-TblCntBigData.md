@@ -9,6 +9,6 @@ author: Mariem ZAOUALI
 # Liste des TPs
 
 - [TP1 Apache Hadoop](https://mariemzaouali.github.io/2025-11-07-bigDataTp1/)
-
+- [TP2 Apache Hive](https://mariemzaouali.github.io/2025-11-17-bigDataTp2/)
 
 
