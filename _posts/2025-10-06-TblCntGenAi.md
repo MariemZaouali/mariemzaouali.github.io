@@ -9,3 +9,4 @@ author: Mariem ZAOUALI
 # Liste des TPs
 
 - [TP1 CNN Challenge](https://mariemzaouali.github.io/2025-11-13-genAITp1/)
+- [TP2 Transformer Encoder Part](https://mariemzaouali.github.io/2025-11-21-genAITp1/)
