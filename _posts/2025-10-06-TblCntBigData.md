@@ -10,5 +10,6 @@ author: Mariem ZAOUALI
 
 - [TP1 Apache Hadoop](https://mariemzaouali.github.io/2025-11-07-bigDataTp1/)
 - [TP2 Apache Hive](https://mariemzaouali.github.io/2025-11-17-bigDataTp2/)
+- [TP3 Apache Spark](https://mariemzaouali.github.io/2024-11-30-bigDataTp3/)
 
 
