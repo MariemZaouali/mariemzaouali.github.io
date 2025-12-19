@@ -276,7 +276,7 @@ results += [generate_images_from_image("img-files/paint-cat.jpg")]
 ```
 
 ### Step 5 : Generate the certificate
-To get your NVIDIA certificate, run the cell: (it was a problem here when I passed the exam, so to avoid any issue, you can paste the following code)
+To submit your code, run the cell: (it was a problem here when I passed the exam, so to avoid any issue, you can paste the following code)
 
 ```python
 import os
