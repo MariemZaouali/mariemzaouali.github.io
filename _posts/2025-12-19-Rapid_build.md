@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rapid Application Development with Large Language Models (LLMs)
-subtitle: fourth TP
+subtitle: Fourth Certification
 tags: [Transformers, NLP et GenAI]
 author: Mariem ZAOUALI
 ---
