@@ -199,37 +199,83 @@ for i, prompt in enumerate(new_sd_prompts, 1):
 ### Pipelining and Iterating
 
 ```python
-## TODO: Execute on assessment objective
-def generate_images_from_image(image_url: str, num_images = 4):
+```python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_nvidia import ChatNVIDIA
 
-    print(f"Generating images for {image_url}")
+def generate_images_from_image(image_url: str, num_images=4):
+    """
+    Generates images from an input image by:
+    1. Describing the input image via LLM
+    2. Generating multiple SDXL prompts using a chat template
+    3. Producing images from the prompts
+    Returns paths, prompts, and original description.
+    """
 
-    ####################################################################
-    ## < EXERCISE SCOPE
-    print("********************************************STEP1***********************************************\n")
-    ## TODO: Generate the description of the image provided in image_url
+    # Step 0: Instantiate your NVIDIA LLM
+    vlm = ChatNVIDIA(
+        model="meta/llama-3.3-70b-instruct",
+        base_url="http://0.0.0.0:9004/v1"
+    )
+
+    # Step 1: Describe the input image
     original_description = ask_about_image(image_url, "Describe the image")
-    print("********************************************STEP2***********************************************\n")
-    ## TODO: Generate four disjoint prompts, hopefully different, to feed into SDXL
-    new_sd_prompts = llm_rewrite_to_image_prompts(original_description, n=4) 
-    print("********************************************STEP3***********************************************\n")
-    ## TODO: Generate the resulting images
-    images = [generate_images(sd_prompt)[0] for sd_prompt in new_sd_prompts]
-    images_paths=plot_imgs(images, r=2, c=2, original_image_name=image_url, output_dir="generated_images")
+    print("Step 1: Original Description:", original_description)
 
-    
-    
-    ## EXERCISE SCOPE >
-    ####################################################################
+    # Step 2: Create a chat template for generating SDXL prompts
+    chat_prompt = ChatPromptTemplate.from_messages([
+        ("system", 
+            f"Create {num_images} distinct and creative Stable Diffusion prompts based on the user's description. "
+            "Each prompt should be detailed, visual, and suitable for AI image generation. "
+            "Make each prompt unique with different styles, perspectives, or interpretations. "
+            f"Return exactly {num_images} prompts as a numbered list (1., 2., ...)."
+        ),
+        ("user", "Create image prompts for: {description}")
+    ])
 
-    
-    return images_paths, new_sd_prompts, original_description
+    # Build a small chain: chat template -> LLM -> string parser
+    chain = chat_prompt | vlm | StrOutputParser()
 
+    # Fill in the placeholder and invoke
+    response = chain.invoke({"description": original_description})
+    print("Step 2: Generated SDXL Prompts (raw):", response)
+
+    # Parse numbered prompts
+    lines = response.strip().split("\n")
+    sd_prompts = []
+    for line in lines:
+        line = line.strip()
+        if re.match(r"^\d+[\.\)]\s+", line):
+            clean_prompt = re.sub(r"^\d+[\.\)]\s+", "", line)
+            if clean_prompt and len(clean_prompt) > 5:
+                sd_prompts.append(clean_prompt)
+
+    # Ensure exactly num_images prompts
+    while len(sd_prompts) < num_images:
+        sd_prompts.append(f"{original_description} - artistic variation {len(sd_prompts)+1}")
+    sd_prompts = sd_prompts[:num_images]
+
+    print("Step 2: Parsed SDXL Prompts:", sd_prompts)
+
+    # Step 3: Generate images
+    images = [generate_images(p)[0] for p in sd_prompts]
+    print("Step 3: Generated Images.")
+
+    # Step 4: Plot/save images
+    images_paths = plot_imgs(images, r=2, c=2, original_image_name=image_url, output_dir="generated_images")
+    print("Step 4: Images saved and plotted!")
+
+    return images_paths, sd_prompts, original_description
+
+# Example usage
 results = []
 results += [generate_images_from_image("imgs/agent-overview.png")]
 results += [generate_images_from_image("imgs/multimodal.png")]
 results += [generate_images_from_image("img-files/tree-frog.jpg")]
 results += [generate_images_from_image("img-files/paint-cat.jpg")]
+```
+
 
 ```
 To get your NVIDIA certificate, run the cell:
