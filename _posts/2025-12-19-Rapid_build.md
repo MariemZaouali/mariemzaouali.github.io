@@ -127,7 +127,7 @@ plot_imgs(images, 1, 1)
 
 ```
 
-### Prompt synthesis
+### Step 3 : Prompt synthesis
 
 ```python
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
@@ -196,9 +196,8 @@ for i, prompt in enumerate(new_sd_prompts, 1):
     print(f"{i}. {prompt}")
 ```
 
-### Pipelining and Iterating
+### Step 4 : Pipelining and Iterating
 
-```python
 ```python
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -276,11 +275,10 @@ results += [generate_images_from_image("img-files/tree-frog.jpg")]
 results += [generate_images_from_image("img-files/paint-cat.jpg")]
 ```
 
+### Step 5 : Generate the certificate
+To get your NVIDIA certificate, run the cell: (it was a problem here when I passed the exam, so to avoid any issue, you can paste the following code)
 
-```
-To get your NVIDIA certificate, run the cell:
 ```python
-
 import os
 import json
 import requests
