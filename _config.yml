@@ -27,7 +27,7 @@ navbar-links:
     - Workflow et BPMN: 
         url: "workflow"
     - Portail Étudiant: 
-        url: "edtech-student/"
+        url: "https://mariemzaouali.github.io/edtech-student/"
   Recherche: 
     url: "https://www.researchgate.net/profile/Mariem-Zaouali"
   A propos de moi: 
